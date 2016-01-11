@@ -3,6 +3,7 @@ package lab2;
 import java.io.*;                 // for I/O
 import java.lang.Integer;  
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -377,29 +378,33 @@ public class DepartmentApplication
       }  // end main()
    private static void findStudents(Faculty falculty) {
 	   // TODO Auto-generated method stub
-	  // HashSet stu = new HashSet<Student>();
+	   HashSet<Student> stutotal = new HashSet<Student>();
 	   for(Course c: falculty.teachingCourses)
 	   {
-		   findStudentByCourse(c);
+		   stutotal.addAll(findStudentByCourse(c));
 		   
 	   }
-	   
+	   for(Student s:stutotal)
+	   {
+		   System.out.println(s.getName());
+	   }
    }
-   private static void findStudentByCourse(Course c) {
+   private static Collection findStudentByCourse(Course c) {
 	   // TODO Auto-generated method stub
-	  // List<Student> stu = new ArrayList();
+	   HashSet<Student> stu = new HashSet();
 	   for(Person p:Department.persons)
 	   {
 		   if(p instanceof Student)
 		   {
 			   if(((Student) p).takingCourses.contains(c))
 			   {
-				  System.out.println(((Student) p).getName());
+				 // System.out.println(((Student) p).getName());
+				   stu.add((Student) p);
 			   }
 		   }
 		   
 	   }
-	  // return stu;
+	   return stu;
    }
 // -------------------------------------------------------------
    public static void putText(String s) //writes string s to the screen
