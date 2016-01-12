@@ -2,12 +2,15 @@ package lab2;
 
 import java.io.*;                 // for I/O
 import java.lang.Integer;  
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -137,6 +140,7 @@ class StaffStudent extends Staff
 {
 	private double GPA;
 	private Date StartDate;
+	private Student cur;
 	public StaffStudent(String name, String phone, int age, double salary,
 			double gPA, Date startDate) {
 		super(name, phone, age, salary);
@@ -343,8 +347,11 @@ public class DepartmentApplication
             {
             case 'g':
                totsalary=dept.getTotalSalary();
+               NumberFormat currencyFormatA = NumberFormat  		   
+                       .getCurrencyInstance(Locale.US);  
                putText("Total sum of all salaries is:");
-               putText(String.valueOf(totsalary)+"\n");              
+               //putText(String.valueOf(totsalary)+"\n");  
+               putText(currencyFormatA.format(totsalary)+"\n");              
                break;
             case 's':
                dept.showAllMembers();
