@@ -231,15 +231,15 @@ class Department
 
 	void unitsPerFaculty()
 	{
-		int tunit = 0;
+		//int tunit = 0;
 		for(Person p:persons)
 		{
 			if(p instanceof Faculty)
 			{
-				tunit += p.getTotalUnits();
+				System.out.println(p.Name+ "'s faculty is: "+ p.getTotalUnits());
 			}
 		}
-		System.out.println("units per faculty is: "+ tunit/Faculty.getNumberOfFaculty());
+		
 	}
 
 	public void showAllMembers() {
