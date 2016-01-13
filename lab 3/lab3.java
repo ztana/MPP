@@ -6,7 +6,7 @@ import java.util.*;
 class Company
 {
 	private String name;
-	private Position topExecutive;
+	private static Position topExecutive;
 	
 	public Company(String name) {
 		this.name = name;
@@ -29,7 +29,7 @@ class Company
 	{
 		departments.add(de);
 	}
-	public Position getTopExecutive() {
+	public static Position getTopExecutive() {
 		return topExecutive;
 	}
 	public void setTopExecutive(Position topExecutive) {
@@ -43,6 +43,17 @@ class Company
 			totalSalary += p.getSalary();
 		}
 		return totalSalary;
+	}
+	public void printReportingHierarchy()
+	{
+		for(Department dep:departments)
+		{
+			System.out.println("Department: "+dep.getName());
+			if(getTopExecutive().equals(dep.getDepartmentHead().getSuperior()))
+			{
+				dep.printReportingHierarchy();
+			}
+		}
 	}
 }
 
@@ -58,6 +69,15 @@ class Department
 		positions = new ArrayList<Position>();
 	}
 
+	Position getDepartmentHead()
+	{
+		Position ran = positions.get(0);
+		while(!ran.getSuperior().equals(Company.getTopExecutive()))
+		{
+			ran = ran.getSuperior();
+		}
+		return ran;
+	}
 	void print()
 	{
 		System.out.println("Department Name: "+name+". Location: "+location);
@@ -85,6 +105,14 @@ class Department
 		}
 		return totalSalary;
 	}
+	public void printReportingHierarchy()
+	{
+		getDepartmentHead().printDownLine();
+	}
+
+	public String getName() {
+		return name;
+	}
 }
 
 class Position
@@ -103,7 +131,13 @@ class Position
 		Level = 0;
 	}
 
-
+	public boolean hasSuperior()
+	{
+		if(this.Superior == null)
+			return false;
+		else
+			return true;
+	}
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -206,7 +240,9 @@ class Employee
 	void print()
 	{
 		System.out.print("      -");
-		System.out.println("ID:"+employeeId+" "+firstName+" "+middleInital+" "+lastName+". Birthday: "+birthDate+" SSN: "+SSN+" salary: "+salary);
+		NumberFormat currencyFormatA = NumberFormat  		   
+                .getCurrencyInstance(Locale.US);  
+		System.out.println("ID:"+employeeId+" "+firstName+" "+middleInital+" "+lastName+". Birthday: "+birthDate+" SSN: "+SSN+" salary: "+currencyFormatA.format(salary));
 	}
 }
 
@@ -270,8 +306,10 @@ public class lab3 {
 		top_executive.setEmployee(Lyle);
 		
 		//lab 3.1
+		System.out.println("***************FOR LAB 3.1****************");
 		com.print();
 		//lab 3.2
+		System.out.println("***************FOR LAB 3.2****************");
 		NumberFormat currencyFormatA = NumberFormat  		   
                  .getCurrencyInstance(Locale.US);  
 		System.out.println("#Total salary of the company: "+currencyFormatA.format(com.getSalary()));
@@ -311,7 +349,11 @@ public class lab3 {
 		marketing1.setLevel(2);
 		
 		//lab 3.3.1
+		System.out.println("**************FOR LAB 3.3.1****************");
 		top_executive.printDownLine();
+		//lab 3.3.2 & 3.3.3
+		System.out.println("***********FOR LAB 3.3.2 & 3.3.3************");
+		com.printReportingHierarchy();
 	}
 
 }
