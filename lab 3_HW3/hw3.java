@@ -5,7 +5,7 @@ import java.util.*;
 
 class Carrier
 {
-	public static enum Company{UPS,US_Mail,FedEx};
+	public static enum Company{UPS,US_Mail,FedEx,DHL};
 	private Company curUse;
 	
 	public double calculateLowCost(double weight,String zone)
@@ -28,6 +28,13 @@ class Carrier
 		{
 			minCost = curCost;
 			curUse = Company.FedEx;
+		}
+		//dhl
+		curCost = calCost(weight,zone,Company.DHL);
+		if(curCost<minCost)
+		{
+			minCost = curCost;
+			curUse = Company.DHL;
 		}
 		return minCost;
 	}
@@ -52,6 +59,8 @@ class Carrier
 				return 0.55*weight;
 			else
 				return 0.43*weight;
+		case DHL:
+			return 0.7*weight;
 		}
 		assert(true);//never should be here
 		return 0;
