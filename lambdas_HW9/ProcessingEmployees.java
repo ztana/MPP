@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ProcessingEmployees
 {
@@ -156,7 +157,64 @@ public class ProcessingEmployees
       list.stream()
       .forEach(Employee.consumers);
 
+      System.out.printf("whose last name begins with the letter  ‘I’:%s\n",
+    	list.stream()
+    	.filter(n->n.getLastName().startsWith("I"))
+    	.map(m->m.getLastName())
+    	.distinct()
+    	.sorted()
+    	.collect(Collectors.toList())
+    		  );
+      
+      //6
+      System.out.printf("average of all the salaries:%.2f\n",
+    		  list.stream()
+    	    	.mapToDouble(Employee::getSalary)
+    	    	.average().getAsDouble()
+      );
+      
+      //7
+      System.out.println("the total salary of all employees:  "+
+    		  list.stream()
+  	    	.mapToDouble(Employee::getSalary)
+  	    	.reduce((x,y)->x+y).getAsDouble()
+      );
+      
+      //8
+      System.out.println("first names of all the employees:  "
+      		+ list.stream()
+      		.map(x->x.getFirstName())
+      		.collect(Collectors.toList())
+    		  );
+      
+      //9
+      System.out.println("find, and later print out, the total of all salaries: "
+      		+ list.stream()
+      		.mapToDouble(Employee::getSalary)
+      		.reduce((x,y)->x+y).getAsDouble()
+      		);
+      
+      //10
+    //  Stream<Integer> echoes =  Stream.iterate(0, n -> n + 2);
+      System.out.println("an infinite stream of even numbers :  "+
+    		  Stream.iterate(0, n -> n + 2).limit(20).collect(Collectors.toList()));
+     // echoes.forEach(System.out::println);
+      
+      //b-3
+      System.out.println("contain the character c, and that do not contain the character d: "+
+    		  countWords(list.stream()
+    		  .map(e->e.getFirstName())
+    		  .collect(Collectors.toList()),'s','n',list.size()
+    		  ));
    } // end main
 
+   public static int countWords(List<String> words, char c, char d, int len)
+   {
+	   return
+	   (int) words.stream()
+	   .filter(e->e.contains(Character.toString(c)))
+	   .filter(e->!e.contains(Character.toString(d)))
+	   .count();
+   }
 } // end class ProcessingEmployees
 
