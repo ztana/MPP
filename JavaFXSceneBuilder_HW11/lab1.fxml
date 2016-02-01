@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="308.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.lab1Controller">
+   <children>
+      <Label layoutX="40.0" layoutY="47.0" text="Name" />
+      <Label layoutX="204.0" layoutY="47.0" text="Street" />
+      <Label layoutX="367.0" layoutY="47.0" text="City" />
+      <Label layoutX="115.0" layoutY="140.0" text="State" />
+      <Label layoutX="307.0" layoutY="140.0" text="Zip" />
+      <TextField fx:id="tf_name" layoutX="40.0" layoutY="76.0" />
+      <TextField fx:id="tf_street" layoutX="203.0" layoutY="76.0" />
+      <TextField fx:id="tf_city" layoutX="367.0" layoutY="76.0" />
+      <TextField fx:id="tf_state" layoutX="115.0" layoutY="166.0" />
+      <TextField fx:id="tf_zip" layoutX="307.0" layoutY="166.0" />
+      <Button fx:id="btn_submit" layoutX="220.0" layoutY="229.0" mnemonicParsing="false" onAction="#handle" text="Submit" />
+      <Button fx:id="btn_next" layoutX="325.0" layoutY="229.0" mnemonicParsing="false" onAction="#handle" text="Next Lab" />
+   </children>
+</AnchorPane>
